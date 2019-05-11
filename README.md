@@ -14,3 +14,11 @@
 - axios
 - Jest
 - React-testing-library
+
+
+### Included Examples
+- Lazy loading with React suspense
+- Typescript 
+- Interface and regular types
+- Extending types
+- react hooks
