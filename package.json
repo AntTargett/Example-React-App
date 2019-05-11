@@ -29,7 +29,6 @@
         "hooks": {
             "pre-commit": "lint-staged",
             "pre-push": "npm test"
-
         }
     },
     "dependencies": {
@@ -40,11 +39,14 @@
         "@types/node": "^11.13.10",
         "@types/react": "^16.8.17",
         "@types/react-dom": "^16.8.4",
+        "@types/react-router-dom": "^4.3.3",
         "axios": "^0.18.0",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
+        "react-material-table": "^1.0.0",
         "react-pose": "^4.0.8",
         "react-pose-text": "^3.1.0",
+        "react-router-dom": "^5.0.0",
         "react-scripts": "2.1.8",
         "typescript": "^3.4.5"
     },

@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/core";
 import posed, { PoseGroup } from "react-pose";
 import SplitText from "react-pose-text";
+import Table from "react-material-table";
 
 type Pie = {
 	storeId: number;
@@ -18,75 +19,133 @@ type StoreData = {
 	title: string;
 	displayName: string;
 	address: string;
-	rating: string;
+	rating: number;
 	pies: Pie[];
+	mobile: string;
 };
 type PieData = {
 	data: StoreData[];
+};
+
+type TableRowData = {
+	pieName: string;
+	storeName: string;
+	price: number;
+	priceString: string;
+	address: string;
+	quantity: number;
+	rating: number;
+	contact: string;
 };
 
 type DelayType = {
 	charIndex: number;
 };
 
+const columns = [
+	{
+		dataName: "pieName",
+		title: "Pie  Name",
+		sort: true
+	},
+	{
+		dataName: "priceString",
+		title: "Price",
+		sort: true
+	},
+	{
+		dataName: "quantity",
+		title: "Quantity",
+		sort: true
+	},
+	{
+		dataName: "storeName",
+		title: "Store Name",
+		sort: true
+	},
+	{ dataName: "address", title: "Address", sort: true },
+	{ dataName: "rating", title: "Rating", sort: true },
+	{ dataName: "contact", title: "Mobile", sort: true }
+];
+const charPoses = {
+	exit: { opacity: 0, y: 20 },
+	enter: {
+		opacity: 1,
+		y: 0,
+		delay: ({ charIndex }: DelayType) => charIndex * 70
+	}
+};
 const HomeContainer = () => {
 	const [hovering, setHovering] = useState(false);
-	const [pieData, setPieData] = useState<PieData>();
-	const charPoses = {
-		exit: { opacity: 0, y: 20 },
-		enter: {
-			opacity: 1,
-			y: 0,
-			delay: ({ charIndex }: DelayType) => charIndex * 70
-		}
-	};
+	const [pieData, setPieData] = useState<TableRowData[]>();
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		axios;
 		axios
 			.get("https://pie.now.sh/stores?_embed=pies&_page=2&_limit=5")
 			.then((data: PieData) => {
-				setPieData(data);
+				const displayData: TableRowData[] = [];
+				data.data.forEach((storeItem: StoreData) => {
+					storeItem.pies.forEach((pie: Pie) => {
+						const TableRowData: TableRowData = {
+							pieName: pie.displayName,
+							storeName: storeItem.displayName,
+							price: pie.price,
+							priceString: pie.priceString,
+							address: storeItem.address,
+							quantity: pie.quantity,
+							rating: storeItem.rating,
+							contact: storeItem.mobile
+						};
+						displayData.push(TableRowData);
+					});
+				});
+
+				setPieData(displayData);
+				setLoading(false);
 			});
 	}, []);
 	return (
 		<Background>
-			<MainTitle>
-				<SplitText
-					initialPose="exit"
-					pose="enter"
-					charPoses={charPoses}
-				>
-					Example React App
-				</SplitText>
-			</MainTitle>
-			<TipContainer>
-				<TipBoxWithSyles
-					pose={hovering ? "hovered" : "idle"}
-					key="TipBox"
-					onMouseEnter={() => setHovering(true)}
-					onMouseLeave={() => setHovering(false)}
-				>
-					Box
-				</TipBoxWithSyles>
-			</TipContainer>
+			<TitleSection>
+				<MainTitle>
+					<SplitText
+						initialPose="exit"
+						pose="enter"
+						charPoses={charPoses}
+					>
+						Example React App
+					</SplitText>
+				</MainTitle>
+			</TitleSection>
+			<MainSection>
+				<Table
+					data={pieData ? pieData : []}
+					columns={columns}
+					loading={loading}
+				/>
+				<TableFooter>
+					<button>Previous Page</button>
+					<button>Next Page</button>
+				</TableFooter>
+			</MainSection>
 		</Background>
 	);
 };
-
-const Square = posed.div({
-	idle: { scale: 1 },
-	hovered: { scale: 1.5 }
-});
-
-const TipBoxWithSyles = styled(Square)`
-	background-color: purple;
+const TableFooter = styled.div`
+	display: flex;
 `;
 
-const TipContainer = styled.div`
-	margin-top: 200px;
+const TitleSection = styled.div`
+	display: flex;
+	justify-content: center;
 `;
-
+const MainSection = styled.div`
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+`;
 const MainTitle = styled.div`
 	font-size: 80px;
 	max-height: 200px;
@@ -94,8 +153,6 @@ const MainTitle = styled.div`
 const Background = styled.div`
 	width: 100%;
 	color: white;
-	display: flex;
-	justify-content: center;
 	height: 100vh;
 	background-image: radial-gradient(#615f5f, #4e4d4d);
 `;
