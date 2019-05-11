@@ -5,6 +5,8 @@ import { css } from "@emotion/core";
 import posed, { PoseGroup } from "react-pose";
 import SplitText from "react-pose-text";
 import Table from "react-material-table";
+import mapData from "../util/mapData";
+import { buildQueryString } from "../util/util";
 import {
 	Pie,
 	PieWithStore,
@@ -23,33 +25,6 @@ const charPoses = {
 		delay: ({ charIndex }: DelayType) => charIndex * 70
 	}
 };
-const mapData = (data: PieWithStore[]) => {
-	const displayData: TableRowData[] = [];
-	data.forEach((pieItem: PieWithStore) => {
-		const TableRowData: TableRowData = {
-			displayName: pieItem.displayName,
-			storeName: pieItem.store.displayName,
-			price: pieItem.price,
-			priceString: pieItem.priceString,
-			address: pieItem.store.address,
-			quantity: pieItem.quantity,
-			rating: pieItem.store.rating,
-			contact: pieItem.store.mobile
-		};
-		displayData.push(TableRowData);
-	});
-	return displayData;
-};
-
-const buildQueryString = (queryParams: QueryType) => {
-	let queryString = "";
-	Object.entries(queryParams).forEach(item => {
-		if (item[1] != "") {
-			queryString += `&${item[0]}=${item[1]}`;
-		}
-	});
-	return queryString;
-};
 
 const HomeContainer = () => {
 	const [pieData, setPieData] = useState<TableRowData[]>();
@@ -66,7 +41,7 @@ const HomeContainer = () => {
 
 	useEffect(() => {
 		axios
-			.get(baseUrl+ buildQueryString(currentQueryParams))
+			.get(baseUrl + buildQueryString(currentQueryParams))
 			.then((result: { data: PieWithStore[]; headers: any }) => {
 				const displayData = mapData(result.data);
 				setTotalResults(result.headers["x-total-count"]);
@@ -128,9 +103,7 @@ const HomeContainer = () => {
 		{ dataName: "rating", title: "Rating", sort: true },
 		{ dataName: "contact", title: "Mobile", sort: true }
 	];
-	const getDisplayResults = () => {
-
-	};
+	const getDisplayResults = () => {};
 	return (
 		<Background>
 			<TitleSection>
@@ -145,18 +118,20 @@ const HomeContainer = () => {
 				</MainTitle>
 			</TitleSection>
 			<MainSection>
-				<TableHeader>
-					Total Results: {totalResults}
-					Displaying Results: {getDisplayResults()}
-					<input />
-					<button>Previous Page</button>
-					<button>Next Page</button>
-				</TableHeader>
 				<Table
 					data={pieData ? pieData : []}
 					columns={columns}
+					headerCustomContent={
+						<TableHeader>
+							Total Results: {totalResults}    
+							Displaying Results: {getDisplayResults()}
+							<input />
+							<button>Previous Page</button>
+							<button>Next Page</button>
+						</TableHeader>
+					}
 					loading={loading}
-					sortCallback={({ dataName, order }) => {
+					sortCallback={({ dataName, order }: any) => {
 						sortFunction(dataName, order);
 					}}
 				/>
