@@ -5,68 +5,16 @@ import { css } from "@emotion/core";
 import posed, { PoseGroup } from "react-pose";
 import SplitText from "react-pose-text";
 import Table from "react-material-table";
+import {
+	Pie,
+	PieWithStore,
+	StoreData,
+	StoreDataWithPie,
+	TableRowData,
+	DelayType,
+	QueryType
+} from "../types";
 
-type Pie = {
-	storeId: number;
-	displayName: string;
-	quantity: number;
-	price: number;
-	priceString: string;
-	isPieOfTheDay?: boolean;
-};
-
-type StoreData = {
-	title: string;
-	displayName: string;
-	address: string;
-	rating: number;
-	pies: Pie[];
-	mobile: string;
-};
-type PieData = {
-	data: StoreData[];
-};
-
-type TableRowData = {
-	pieName: string;
-	storeName: string;
-	price: number;
-	priceString: string;
-	address: string;
-	quantity: number;
-	rating: number;
-	contact: string;
-};
-
-type DelayType = {
-	charIndex: number;
-};
-
-const columns = [
-	{
-		dataName: "pieName",
-		title: "Pie  Name",
-		sort: true
-	},
-	{
-		dataName: "priceString",
-		title: "Price",
-		sort: true
-	},
-	{
-		dataName: "quantity",
-		title: "Quantity",
-		sort: true
-	},
-	{
-		dataName: "storeName",
-		title: "Store Name",
-		sort: true
-	},
-	{ dataName: "address", title: "Address", sort: true },
-	{ dataName: "rating", title: "Rating", sort: true },
-	{ dataName: "contact", title: "Mobile", sort: true }
-];
 const charPoses = {
 	exit: { opacity: 0, y: 20 },
 	enter: {
@@ -75,37 +23,114 @@ const charPoses = {
 		delay: ({ charIndex }: DelayType) => charIndex * 70
 	}
 };
+const mapData = (data: PieWithStore[]) => {
+	const displayData: TableRowData[] = [];
+	data.forEach((pieItem: PieWithStore) => {
+		const TableRowData: TableRowData = {
+			displayName: pieItem.displayName,
+			storeName: pieItem.store.displayName,
+			price: pieItem.price,
+			priceString: pieItem.priceString,
+			address: pieItem.store.address,
+			quantity: pieItem.quantity,
+			rating: pieItem.store.rating,
+			contact: pieItem.store.mobile
+		};
+		displayData.push(TableRowData);
+	});
+	return displayData;
+};
+
+const buildQueryString = (queryParams: QueryType) => {
+	let queryString = "";
+	Object.entries(queryParams).forEach(item => {
+		if (item[1] != "") {
+			queryString += `&${item[0]}=${item[1]}`;
+		}
+	});
+	return queryString;
+};
+
 const HomeContainer = () => {
-	const [hovering, setHovering] = useState(false);
 	const [pieData, setPieData] = useState<TableRowData[]>();
 	const [loading, setLoading] = useState(true);
+	const [totalResults, setTotalResults] = useState(0);
+	const [currentQueryParams, setQueryParams] = useState<QueryType>({
+		_order: "",
+		_sort: "",
+		displayName: "",
+		_page: 1
+	});
+	const baseUrl =
+		"https://pie.now.sh/pies?_expand=store&_limit=5&isPieOfTheDay=true";
 
 	useEffect(() => {
-		axios;
 		axios
-			.get("https://pie.now.sh/stores?_embed=pies&_page=2&_limit=5")
-			.then((data: PieData) => {
-				const displayData: TableRowData[] = [];
-				data.data.forEach((storeItem: StoreData) => {
-					storeItem.pies.forEach((pie: Pie) => {
-						const TableRowData: TableRowData = {
-							pieName: pie.displayName,
-							storeName: storeItem.displayName,
-							price: pie.price,
-							priceString: pie.priceString,
-							address: storeItem.address,
-							quantity: pie.quantity,
-							rating: storeItem.rating,
-							contact: storeItem.mobile
-						};
-						displayData.push(TableRowData);
-					});
-				});
-
+			.get(baseUrl+ buildQueryString(currentQueryParams))
+			.then((result: { data: PieWithStore[]; headers: any }) => {
+				const displayData = mapData(result.data);
+				setTotalResults(result.headers["x-total-count"]);
 				setPieData(displayData);
 				setLoading(false);
 			});
 	}, []);
+	const searchFunction = (query: string) => {
+		setLoading(true);
+		const queryParams = currentQueryParams;
+		queryParams.displayName = query;
+		setQueryParams(queryParams);
+		axios
+			.get(baseUrl + buildQueryString(queryParams))
+			.then((result: { data: PieWithStore[] }) => {
+				const displayData = mapData(result.data);
+				setPieData(displayData);
+				setLoading(false);
+			});
+	};
+	const sortFunction = (columnName: string, order?: string) => {
+		setLoading(true);
+		const queryParams = currentQueryParams;
+		queryParams._sort = columnName;
+		queryParams._order = order ? order : "";
+		setQueryParams(queryParams);
+
+		axios
+			.get(baseUrl + buildQueryString(queryParams))
+			.then((result: { data: PieWithStore[] }) => {
+				const displayData = mapData(result.data);
+				setPieData(displayData);
+				setLoading(false);
+			});
+	};
+
+	const columns = [
+		{
+			dataName: "displayName",
+			title: "Pie  Name",
+			sort: true
+		},
+		{
+			dataName: "priceString",
+			title: "Price",
+			sort: true
+		},
+		{
+			dataName: "quantity",
+			title: "Quantity",
+			sort: true
+		},
+		{
+			dataName: "storeName",
+			title: "Store Name",
+			sort: true
+		},
+		{ dataName: "address", title: "Address", sort: true },
+		{ dataName: "rating", title: "Rating", sort: true },
+		{ dataName: "contact", title: "Mobile", sort: true }
+	];
+	const getDisplayResults = () => {
+
+	};
 	return (
 		<Background>
 			<TitleSection>
@@ -120,10 +145,20 @@ const HomeContainer = () => {
 				</MainTitle>
 			</TitleSection>
 			<MainSection>
+				<TableHeader>
+					Total Results: {totalResults}
+					Displaying Results: {getDisplayResults()}
+					<input />
+					<button>Previous Page</button>
+					<button>Next Page</button>
+				</TableHeader>
 				<Table
 					data={pieData ? pieData : []}
 					columns={columns}
 					loading={loading}
+					sortCallback={({ dataName, order }) => {
+						sortFunction(dataName, order);
+					}}
 				/>
 				<TableFooter>
 					<button>Previous Page</button>
@@ -133,6 +168,9 @@ const HomeContainer = () => {
 		</Background>
 	);
 };
+const TableHeader = styled.div`
+	display: flex;
+`;
 const TableFooter = styled.div`
 	display: flex;
 `;
@@ -152,8 +190,6 @@ const MainTitle = styled.div`
 `;
 const Background = styled.div`
 	width: 100%;
-	color: white;
 	height: 100vh;
-	background-image: radial-gradient(#615f5f, #4e4d4d);
 `;
 export default HomeContainer;
