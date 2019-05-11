@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Stibold';
+    src: local('Stibold'),url(./fonts/stibold.ttf) format("truetype");
+    font-weight: 400;
+    font-display: swap;
+  }
+
+
+
+body {
+    margin: 0px;
+    font-family: "Stibold", "Helvetica", "Arial", "sans-serif";
+}
