@@ -20,6 +20,7 @@ export type QueryType = {
 	_page: number;
 	_order: string;
 	_sort: string;
+	_limit: number;
 	displayName: string;
 };
 export interface StoreDataWithPie extends Pie {

@@ -5,6 +5,8 @@ import { css } from "@emotion/core";
 import posed, { PoseGroup } from "react-pose";
 import SplitText from "react-pose-text";
 import Table from "react-material-table";
+import TextField from "@material-ui/core/TextField";
+import TablePagination from "./TablePagination";
 import mapData from "../util/mapData";
 import { buildQueryString } from "../util/util";
 import {
@@ -26,6 +28,12 @@ const charPoses = {
 	}
 };
 
+const tableStyle = {
+	".table-div": {
+		"overflow-y": "hidden"
+	}
+};
+
 const HomeContainer = () => {
 	const [pieData, setPieData] = useState<TableRowData[]>();
 	const [loading, setLoading] = useState(true);
@@ -34,33 +42,33 @@ const HomeContainer = () => {
 		_order: "",
 		_sort: "",
 		displayName: "",
-		_page: 1
+		_page: 1,
+		_limit: 5
 	});
-	const baseUrl =
-		"https://pie.now.sh/pies?_expand=store&_limit=5&isPieOfTheDay=true";
+	const baseUrl = "https://pie.now.sh/pies?_expand=store&isPieOfTheDay=true";
 
 	useEffect(() => {
+		getPies(currentQueryParams);
+	}, []);
+
+	const getPies = (queryParams: QueryType) => {
+		setLoading(true);
+
 		axios
-			.get(baseUrl + buildQueryString(currentQueryParams))
+			.get(baseUrl + buildQueryString(queryParams))
 			.then((result: { data: PieWithStore[]; headers: any }) => {
 				const displayData = mapData(result.data);
-				setTotalResults(result.headers["x-total-count"]);
 				setPieData(displayData);
+				setTotalResults(result.headers["x-total-count"]);
 				setLoading(false);
 			});
-	}, []);
+	};
 	const searchFunction = (query: string) => {
 		setLoading(true);
 		const queryParams = currentQueryParams;
 		queryParams.displayName = query;
 		setQueryParams(queryParams);
-		axios
-			.get(baseUrl + buildQueryString(queryParams))
-			.then((result: { data: PieWithStore[] }) => {
-				const displayData = mapData(result.data);
-				setPieData(displayData);
-				setLoading(false);
-			});
+		getPies(queryParams);
 	};
 	const sortFunction = (columnName: string, order?: string) => {
 		setLoading(true);
@@ -68,14 +76,7 @@ const HomeContainer = () => {
 		queryParams._sort = columnName;
 		queryParams._order = order ? order : "";
 		setQueryParams(queryParams);
-
-		axios
-			.get(baseUrl + buildQueryString(queryParams))
-			.then((result: { data: PieWithStore[] }) => {
-				const displayData = mapData(result.data);
-				setPieData(displayData);
-				setLoading(false);
-			});
+		getPies(queryParams);
 	};
 
 	const columns = [
@@ -103,7 +104,28 @@ const HomeContainer = () => {
 		{ dataName: "rating", title: "Rating", sort: true },
 		{ dataName: "contact", title: "Mobile", sort: true }
 	];
-	const getDisplayResults = () => {};
+	const getDisplayResults = () => {
+		const pieDataLength = pieData ? pieData.length : 0;
+		var from = (currentQueryParams._page - 1) * currentQueryParams._limit;
+		var to = from + pieDataLength;
+
+		return `${from} to ${to}`;
+	};
+
+	const isMoreResults = () => {
+		const pieDataLength = pieData ? pieData.length : 0;
+		var current =
+			(currentQueryParams._page - 1) * currentQueryParams._limit +
+			pieDataLength;
+		return loading ? false : totalResults > current;
+	};
+
+	const changePage = (pageNumber: number) => {
+		const queryParams = currentQueryParams;
+		queryParams._page = pageNumber;
+		setQueryParams(queryParams);
+		getPies(queryParams);
+	};
 	return (
 		<Background>
 			<TitleSection>
@@ -121,23 +143,42 @@ const HomeContainer = () => {
 				<Table
 					data={pieData ? pieData : []}
 					columns={columns}
+					header={`Pies of the day Total Results: ${totalResults}`}
 					headerCustomContent={
 						<TableHeader>
-							Total Results: {totalResults}    
-							Displaying Results: {getDisplayResults()}
-							<input />
-							<button>Previous Page</button>
-							<button>Next Page</button>
+							<TextField
+								id="search-field"
+								label="Search"
+								onChange={(event: any) => {
+									console.log(event);
+									searchFunction(event.target.value);
+								}}
+							/>
+							<TablePagination
+								totalResults={totalResults}
+								changePage={changePage}
+								pieData={pieData ? pieData : []}
+								loading={loading}
+								currentQueryParams={currentQueryParams}
+								displayResults={getDisplayResults()}
+							/>
 						</TableHeader>
 					}
+					css={tableStyle}
 					loading={loading}
 					sortCallback={({ dataName, order }: any) => {
 						sortFunction(dataName, order);
 					}}
 				/>
 				<TableFooter>
-					<button>Previous Page</button>
-					<button>Next Page</button>
+					<TablePagination
+						totalResults={totalResults}
+						changePage={changePage}
+						pieData={pieData ? pieData : []}
+						loading={loading}
+						currentQueryParams={currentQueryParams}
+						displayResults={getDisplayResults()}
+					/>
 				</TableFooter>
 			</MainSection>
 		</Background>
@@ -145,9 +186,11 @@ const HomeContainer = () => {
 };
 const TableHeader = styled.div`
 	display: flex;
+	justify-content: space-between;
 `;
 const TableFooter = styled.div`
 	display: flex;
+	justify-content: flex-end;
 `;
 
 const TitleSection = styled.div`

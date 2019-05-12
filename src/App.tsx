@@ -6,7 +6,7 @@ import {
 	HashRouter as Router
 } from "react-router-dom";
 const HomeContainer = lazy(() => import("./HomeContainer/HomeContainer"));
-
+// const ExampleRoute = lazy(() => import("./ExampleRoute/ExampleRoute"));
 const App = () => {
 	return (
 		<Router>
@@ -14,8 +14,13 @@ const App = () => {
 				<Route
 					exact
 					path="/"
-                    render={WaitingComponent(HomeContainer)}
+					render={WaitingComponent(HomeContainer)}
 				/>
+				{/* <Route
+					exact
+					path="/Example"
+					render={WaitingComponent(ExampleRoute)}
+				/> */}
 			</Switch>
 		</Router>
 	);
