@@ -27,13 +27,12 @@
 - react-pose
 
 
-#### Functionality
-- axios
-
 #### Testing
 - Jest
 - React-testing-library
 
+#### Other
+- axios
 
 ### Included Examples
 - Lazy loading with React suspense
