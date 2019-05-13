@@ -14,6 +14,7 @@
 - axios
 - Jest
 - React-testing-library
+- material-ui
 
 
 ### Included Examples
@@ -22,3 +23,6 @@
 - Interface and regular types
 - Extending types
 - react hooks
+- Using Emotion 10 styled components to style material ui 
+- Using context to have a dark and light more
+- Error Boundries 
