@@ -6,11 +6,14 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
 import { TablePaginationPropTypes } from "../types"
 
+// Function to check whether or not the forward page button should be disabled
 const areMoreResults = (dataLength: number, pageNumber: number, results: number, limit: number, loading: boolean) => {
 	const current = (pageNumber - 1) * limit + dataLength
 	return loading ? false : results > current
 }
+// Function to check whether or not the back page button should be disabled
 const areLessResults = (pageNumber: number, loading: boolean) => (loading ? false : pageNumber > 1)
+
 const TablePagination = ({
 	changePage,
 	currentQueryParams,
@@ -22,6 +25,7 @@ const TablePagination = ({
 	<div>
 		{displayResults}
 		<IconButton
+			// inherits parents color
 			color="inherit"
 			onClick={() =>
 				changePage(areLessResults(currentQueryParams._page, loading) && currentQueryParams._page - 1)

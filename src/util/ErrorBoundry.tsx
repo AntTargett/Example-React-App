@@ -1,7 +1,10 @@
+/** @jsx jsx */
+import { jsx } from "@emotion/core"
 import React, { Component } from "react"
 import { Card } from "@material-ui/core"
 import { ErrorBoundaryProps, ErrorBoundaryState } from "../types"
 
+// To catch errors and display a fallback UI.
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 	constructor(props: Readonly<ErrorBoundaryProps>) {
 		super(props)

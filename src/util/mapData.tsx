@@ -1,5 +1,6 @@
 import { PieWithStore, TableRowData } from "../types"
 
+// Maps data from API to display
 const mapData = (data: PieWithStore[]) => {
 	const displayData: TableRowData[] = []
 	data.forEach((pieItem: PieWithStore) => {

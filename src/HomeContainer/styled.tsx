@@ -6,6 +6,14 @@ import TextField from "@material-ui/core/TextField"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Switch from "@material-ui/core/Switch"
 
+// This file holds the styled components used throughout the app.
+// Depending on scale and how much would be reused I would probably change the file structure
+
+// Using emotion with Material-ui is an interesting process. Since I am not overriding injection point of css
+// the && gives priority to the styles provided
+
+// Below is an example of creating a class and then passing it back into the function
+// Forwards other props back into the component
 const StyledFormControlLabel = styled(other => <FormControlLabel classes={{ label: "label" }} {...other} />)`
 	&& {
 		& .label {

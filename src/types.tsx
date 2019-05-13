@@ -1,3 +1,6 @@
+// All the types specified in the application.
+// Similiar to the styled components I would likely change how I file them based on scaling and how much needed to be reused
+
 export interface Pie {
 	storeId: number
 	displayName: string
