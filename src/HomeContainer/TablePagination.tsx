@@ -4,22 +4,13 @@ import * as React from "react"
 import IconButton from "@material-ui/core/IconButton"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
-import { QueryType, TableRowData } from "../types"
-
-interface TablePaginationPropTypes {
-	changePage: Function
-	totalResults: number
-	currentQueryParams: QueryType
-	pieData: TableRowData[]
-	loading: boolean
-	displayResults: string
-}
+import { TablePaginationPropTypes } from "../types"
 
 const areMoreResults = (dataLength: number, pageNumber: number, results: number, limit: number, loading: boolean) => {
 	const current = (pageNumber - 1) * limit + dataLength
 	return loading ? false : results > current
 }
-const areLessResults = (pageNumber: number, loading: boolean) => (loading ? false : pageNumber > 0)
+const areLessResults = (pageNumber: number, loading: boolean) => (loading ? false : pageNumber > 1)
 const TablePagination = ({
 	changePage,
 	currentQueryParams,
@@ -31,6 +22,7 @@ const TablePagination = ({
 	<div>
 		{displayResults}
 		<IconButton
+			color="inherit"
 			onClick={() =>
 				changePage(areLessResults(currentQueryParams._page, loading) && currentQueryParams._page - 1)
 			}
@@ -39,6 +31,7 @@ const TablePagination = ({
 			<KeyboardArrowLeft />
 		</IconButton>
 		<IconButton
+			color="inherit"
 			onClick={() =>
 				changePage(
 					areMoreResults(

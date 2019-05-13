@@ -4,6 +4,7 @@ import React, { Suspense, lazy } from "react"
 import { Route, Switch, HashRouter as Router } from "react-router-dom"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import { Flex } from "./util/commonComponents"
+import ErrorBoundary from "./util/ErrorBoundry"
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
 const HomeContainer = lazy(() => import("./HomeContainer/HomeContainer"))
@@ -26,12 +27,14 @@ const WaitingComponent = (Component: any) => {
 }
 
 const App = () => (
-	<Router>
-		<Switch>
-			<Route exact path="/" render={WaitingComponent(HomeContainer)} />
-			<Route exact path="/Example" render={WaitingComponent(ExampleRoute)} />
-		</Switch>
-	</Router>
+	<ErrorBoundary>
+		<Router>
+			<Switch>
+				<Route exact path="/" render={WaitingComponent(HomeContainer)} />
+				<Route exact path="/Example" render={WaitingComponent(ExampleRoute)} />
+			</Switch>
+		</Router>
+	</ErrorBoundary>
 )
 
 export default App

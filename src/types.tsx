@@ -53,3 +53,27 @@ export interface ThemeType {
 export interface HomeContainerPropType {
 	theme: ThemeType
 }
+
+export type TargetType = {
+	value: string
+}
+
+export type EventType = {
+	target: TargetType
+}
+export interface TablePaginationPropTypes {
+	changePage: Function
+	totalResults: number
+	currentQueryParams: QueryType
+	pieData: TableRowData[]
+	loading: boolean
+	displayResults: string
+}
+
+export type ErrorBoundaryProps = {
+	children: any
+}
+export type ErrorBoundaryState = {
+	hasError: boolean
+	errorMessage: string
+}

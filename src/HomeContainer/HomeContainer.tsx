@@ -11,6 +11,7 @@ import { withTheme } from "emotion-theming"
 import { useTheme } from "../Theme/ThemeContext"
 import TablePagination from "./TablePagination"
 import useDebounce from "../util/useDebounce"
+import ErrorBoundary from "../util/ErrorBoundry"
 import mapData from "../util/mapData"
 import { buildQueryString } from "../util/util"
 import {
@@ -25,7 +26,7 @@ import {
 	StyledSwitch
 } from "./styled"
 
-import { TableRowData, DelayType, QueryType } from "../types"
+import { TableRowData, DelayType, QueryType, EventType } from "../types"
 
 const charPoses = {
 	exit: { opacity: 0, y: 20 },
@@ -59,10 +60,7 @@ const HomeContainer = () => {
 		setLoading(false)
 	}
 	const debouncedSearchTerm = useDebounce(searchTerm, 500)
-	// Essentially component did mount
-	useEffect(() => {
-		getPies(currentQueryParams)
-	}, [])
+
 	// Waits for a change for debounched search term. Aim is to wait for user to stop typing before firing next api call.
 	useEffect(() => {
 		getPies(currentQueryParams)
@@ -123,71 +121,74 @@ const HomeContainer = () => {
 		setQueryParams(queryParams)
 		getPies(queryParams)
 	}
+
 	return (
-		<Background>
-			<TitleSection>
-				<MainTitle>
-					<SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
-						Example React App
-					</SplitText>
-				</MainTitle>
-			</TitleSection>
-			<MainSection>
-				<StyledFormControlLabel
-					control={
-						<StyledSwitch
-							checked={themeState.darkmode}
-							onChange={() => {
-								themeState.toggle()
-							}}
-							value="darkmode"
-						/>
-					}
-					label="DarkMode"
-				/>
-				<Table
-					data={pieData || []}
-					columns={columns}
-					header={`Pies of the day Total Results: ${totalResults}`}
-					headerCustomContent={
-						<TableHeader>
-							<StyledTextField
-								id="search-field"
-								label="Search"
-								onChange={(event: any) => {
-									searchFunction(event.target.value)
+		<ErrorBoundary>
+			<Background>
+				<TitleSection>
+					<MainTitle>
+						<SplitText initialPose="exit" pose="enter" charPoses={charPoses}>
+							Example React App
+						</SplitText>
+					</MainTitle>
+				</TitleSection>
+				<MainSection>
+					<StyledFormControlLabel
+						control={
+							<StyledSwitch
+								checked={themeState.darkmode}
+								onChange={() => {
+									themeState.toggle()
 								}}
-								InputProps={{
-									startAdornment: <SearchIcon />
-								}}
+								value="darkmode"
 							/>
-							<TablePagination
-								totalResults={totalResults}
-								changePage={changePage}
-								pieData={pieData || []}
-								loading={loading}
-								currentQueryParams={currentQueryParams}
-								displayResults={getDisplayResults()}
-							/>
-						</TableHeader>
-					}
-					loading={loading}
-					sortCallback={({ dataName, order }: any) => {
-						sortFunction(dataName, order)
-					}}
-				/>
-				<TableFooter>
-					<TablePagination
-						totalResults={totalResults}
-						changePage={changePage}
-						pieData={pieData || []}
-						loading={loading}
-						currentQueryParams={currentQueryParams}
-						displayResults={getDisplayResults()}
+						}
+						label="DarkMode"
 					/>
-				</TableFooter>
-			</MainSection>
-		</Background>
+					<Table
+						data={pieData || []}
+						columns={columns}
+						header={`Pies of the day Total Results: ${totalResults}`}
+						headerCustomContent={
+							<TableHeader>
+								<StyledTextField
+									id="search-field"
+									label="Search"
+									onChange={(event: EventType) => {
+										searchFunction(event.target.value)
+									}}
+									InputProps={{
+										startAdornment: <SearchIcon />
+									}}
+								/>
+								<TablePagination
+									totalResults={totalResults}
+									changePage={changePage}
+									pieData={pieData || []}
+									loading={loading}
+									currentQueryParams={currentQueryParams}
+									displayResults={getDisplayResults()}
+								/>
+							</TableHeader>
+						}
+						loading={loading}
+						sortCallback={({ dataName, order }: any) => {
+							sortFunction(dataName, order)
+						}}
+					/>
+					<TableFooter>
+						<TablePagination
+							totalResults={totalResults}
+							changePage={changePage}
+							pieData={pieData || []}
+							loading={loading}
+							currentQueryParams={currentQueryParams}
+							displayResults={getDisplayResults()}
+						/>
+					</TableFooter>
+				</MainSection>
+			</Background>
+		</ErrorBoundary>
 	)
 }
 

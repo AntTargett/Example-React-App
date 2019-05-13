@@ -1,20 +1,10 @@
-// /** @jsx jsx */
+/** @jsx jsx */
 import { jsx } from "@emotion/core"
 import React from "react"
 import styled from "@emotion/styled"
 import TextField from "@material-ui/core/TextField"
 import FormControlLabel from "@material-ui/core/FormControlLabel"
 import Switch from "@material-ui/core/Switch"
-
-import IconButton from "@material-ui/core/IconButton"
-
-const StyledIconButton = styled(other => <IconButton classes={{ root: "label" }} {...other} />)`
-	&& {
-		& .label {
-			color: ${props => props.theme.body};
-		}
-	}
-`
 
 const StyledFormControlLabel = styled(other => <FormControlLabel classes={{ label: "label" }} {...other} />)`
 	&& {
@@ -121,6 +111,5 @@ export {
 	MainSection,
 	TitleSection,
 	TableFooter,
-	TableHeader,
-	StyledIconButton
+	TableHeader
 }
