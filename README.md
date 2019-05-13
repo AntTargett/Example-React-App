@@ -36,7 +36,7 @@
 
 
 ### Included Examples
-- Lazy loading with React suspense\
+- Lazy loading with React suspense
 - React hooks
 - Debounce hook 
 - Using Emotion 10 styled components to style material ui 
