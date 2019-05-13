@@ -41,3 +41,14 @@ export type TableRowData = {
 export type DelayType = {
 	charIndex: number;
 };
+export type  themeHookType = {
+	darkmode: boolean;
+	hasThemeMounted: boolean;
+};
+export type themeType={
+	background: string;
+	body: string;
+}
+export type HomeContainerPropType = {
+	theme: themeType;
+};
