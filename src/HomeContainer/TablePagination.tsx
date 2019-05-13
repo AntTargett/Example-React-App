@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { QueryType, TableRowData } from "../types";
-import styled from "@emotion/styled";
 import IconButton from "@material-ui/core/IconButton";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import MUITablePagination from "@material-ui/core/TablePagination";
+import { StyledKeyboardArrowLeft , StyledKeyboardArrowRight} from "./styled";
 
 type TablePaginationPropTypes = {
 	changePage: Function;
@@ -48,7 +45,7 @@ const TablePagination = ({
 				}
 				disabled={!areLessResults(currentQueryParams._page, loading)}
 			>
-				<KeyboardArrowLeft />
+				<StyledKeyboardArrowLeft />
 			</IconButton>
 			<IconButton
 				onClick={() =>
@@ -72,12 +69,11 @@ const TablePagination = ({
 					)
 				}
 			>
-				<KeyboardArrowRight />
+				<StyledKeyboardArrowRight />
 			</IconButton>
 		</div>
 	);
 };
 
-const BeautifulButton = styled.button``;
 
 export default TablePagination;

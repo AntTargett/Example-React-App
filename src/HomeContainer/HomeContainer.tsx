@@ -1,23 +1,38 @@
+/** @jsx jsx */
+import { jsx, css } from "@emotion/core";
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "@emotion/styled";
-import { css } from "@emotion/core";
-import posed, { PoseGroup } from "react-pose";
 import SplitText from "react-pose-text";
+//react-material-table is a package that I co-authored https://github.com/nwaywood/react-material-table
 import Table from "react-material-table";
-import TextField from "@material-ui/core/TextField";
+
+import Switch from "@material-ui/core/Switch";
+import SearchIcon from "@material-ui/icons/Search";
+import { useTheme } from "../Theme/ThemeContext";
 import TablePagination from "./TablePagination";
+import useDebounce from "../util/useDebounce";
 import mapData from "../util/mapData";
 import { buildQueryString } from "../util/util";
 import {
-	Pie,
-	PieWithStore,
-	StoreData,
-	StoreDataWithPie,
+	StyledFormControlLabel,
+	StyledTextField,
+	Background,
+	MainTitle,
+	MainSection,
+	TitleSection,
+	TableFooter,
+	TableHeader,
+	StyledSwitch,
+} from "./styled";
+
+import {
 	TableRowData,
 	DelayType,
-	QueryType
+	QueryType,
+	HomeContainerPropType,
 } from "../types";
+import { withTheme } from "emotion-theming";
 
 const charPoses = {
 	exit: { opacity: 0, y: 20 },
@@ -28,16 +43,12 @@ const charPoses = {
 	}
 };
 
-const tableStyle = {
-	".table-div": {
-		"overflow-y": "hidden"
-	}
-};
-
-const HomeContainer = () => {
+const HomeContainer = (props: HomeContainerPropType) => {
 	const [pieData, setPieData] = useState<TableRowData[]>();
+	const [searchTerm, setSearchTerm] = useState("");
 	const [loading, setLoading] = useState(true);
 	const [totalResults, setTotalResults] = useState(0);
+	const themeState = useTheme();
 	const [currentQueryParams, setQueryParams] = useState<QueryType>({
 		_order: "",
 		_sort: "",
@@ -46,29 +57,31 @@ const HomeContainer = () => {
 		_limit: 5
 	});
 	const baseUrl = "https://pie.now.sh/pies?_expand=store&isPieOfTheDay=true";
-
+	const debouncedSearchTerm = useDebounce(searchTerm, 500);
+	//Essentially component did mount
 	useEffect(() => {
 		getPies(currentQueryParams);
 	}, []);
+	// Waits for a change for debounched search term. Aim is to wait for user to stop typing before firing next api call.
+	useEffect(() => {
+		console.log("GETTING CALLED");
+		getPies(currentQueryParams);
+	}, [debouncedSearchTerm]);
 
-	const getPies = (queryParams: QueryType) => {
+	const getPies = async (queryParams: QueryType) => {
 		setLoading(true);
-
-		axios
-			.get(baseUrl + buildQueryString(queryParams))
-			.then((result: { data: PieWithStore[]; headers: any }) => {
-				const displayData = mapData(result.data);
-				setPieData(displayData);
-				setTotalResults(result.headers["x-total-count"]);
-				setLoading(false);
-			});
+		const result = await axios.get(baseUrl + buildQueryString(queryParams));
+		const displayData = mapData(result.data);
+		setPieData(displayData);
+		setTotalResults(result.headers["x-total-count"]);
+		setLoading(false);
 	};
 	const searchFunction = (query: string) => {
 		setLoading(true);
 		const queryParams = currentQueryParams;
 		queryParams.displayName = query;
 		setQueryParams(queryParams);
-		getPies(queryParams);
+		setSearchTerm(query);
 	};
 	const sortFunction = (columnName: string, order?: string) => {
 		setLoading(true);
@@ -112,20 +125,13 @@ const HomeContainer = () => {
 		return `${from} to ${to}`;
 	};
 
-	const isMoreResults = () => {
-		const pieDataLength = pieData ? pieData.length : 0;
-		var current =
-			(currentQueryParams._page - 1) * currentQueryParams._limit +
-			pieDataLength;
-		return loading ? false : totalResults > current;
-	};
-
 	const changePage = (pageNumber: number) => {
 		const queryParams = currentQueryParams;
 		queryParams._page = pageNumber;
 		setQueryParams(queryParams);
 		getPies(queryParams);
 	};
+	console.log(props.theme);
 	return (
 		<Background>
 			<TitleSection>
@@ -140,18 +146,33 @@ const HomeContainer = () => {
 				</MainTitle>
 			</TitleSection>
 			<MainSection>
+				<StyledFormControlLabel
+					control={
+						<StyledSwitch
+							checked={themeState.darkmode}
+							onChange={(event: any) => {
+								themeState.toggle();
+							}}
+							value="darkmode"
+						/>
+					}
+					label="DarkMode"
+				/>
 				<Table
 					data={pieData ? pieData : []}
 					columns={columns}
 					header={`Pies of the day Total Results: ${totalResults}`}
 					headerCustomContent={
 						<TableHeader>
-							<TextField
+							<StyledTextField
 								id="search-field"
 								label="Search"
 								onChange={(event: any) => {
 									console.log(event);
 									searchFunction(event.target.value);
+								}}
+								InputProps={{
+									startAdornment: <SearchIcon />
 								}}
 							/>
 							<TablePagination
@@ -164,7 +185,6 @@ const HomeContainer = () => {
 							/>
 						</TableHeader>
 					}
-					css={tableStyle}
 					loading={loading}
 					sortCallback={({ dataName, order }: any) => {
 						sortFunction(dataName, order);
@@ -184,30 +204,5 @@ const HomeContainer = () => {
 		</Background>
 	);
 };
-const TableHeader = styled.div`
-	display: flex;
-	justify-content: space-between;
-`;
-const TableFooter = styled.div`
-	display: flex;
-	justify-content: flex-end;
-`;
 
-const TitleSection = styled.div`
-	display: flex;
-	justify-content: center;
-`;
-const MainSection = styled.div`
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-`;
-const MainTitle = styled.div`
-	font-size: 80px;
-	max-height: 200px;
-`;
-const Background = styled.div`
-	width: 100%;
-	height: 100vh;
-`;
-export default HomeContainer;
+export default withTheme(HomeContainer);
