@@ -29,5 +29,5 @@
 - Extending types
 - react hooks
 - Using Emotion 10 styled components to style material ui 
-- Using context to have a dark and light more
+- Using context to have a dark and light mode
 - Error Boundries 
