@@ -2,6 +2,11 @@
 
 #### Aim is to be used personally and for example Typescript/React with hooks and example usage of react-material-table
 
+## Usage
+- git clone this repo
+- npm install 
+- npm run start
+
 
 ## Tech
 - Typescript
