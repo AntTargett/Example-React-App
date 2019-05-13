@@ -1,9 +1,9 @@
-import { PieWithStore, TableRowData } from "../types";
+import { PieWithStore, TableRowData } from "../types"
 
 const mapData = (data: PieWithStore[]) => {
-	const displayData: TableRowData[] = [];
+	const displayData: TableRowData[] = []
 	data.forEach((pieItem: PieWithStore) => {
-		const TableRowData: TableRowData = {
+		const TableRow: TableRowData = {
 			displayName: pieItem.displayName,
 			storeName: pieItem.store.displayName,
 			price: pieItem.price,
@@ -12,10 +12,10 @@ const mapData = (data: PieWithStore[]) => {
 			quantity: pieItem.quantity,
 			rating: pieItem.store.rating,
 			contact: pieItem.store.mobile
-		};
-		displayData.push(TableRowData);
-	});
-	return displayData;
-};
+		}
+		displayData.push(TableRow)
+	})
+	return displayData
+}
 
-export default mapData;
+export default mapData

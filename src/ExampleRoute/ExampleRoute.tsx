@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react"
 
-const ExampleRoute = () => {
-	return <div>I am an Example Route</div>;
-};
+const ExampleRoute = () => <div>I am an Example Route</div>
 
-export default ExampleRoute;
+export default ExampleRoute

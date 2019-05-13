@@ -1,30 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { QueryType, TableRowData } from "../types";
-import IconButton from "@material-ui/core/IconButton";
-import { StyledKeyboardArrowLeft , StyledKeyboardArrowRight} from "./styled";
+/** @jsx jsx */
+import { jsx } from "@emotion/core"
+import * as React from "react"
+import IconButton from "@material-ui/core/IconButton"
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
+import { QueryType, TableRowData } from "../types"
 
-type TablePaginationPropTypes = {
-	changePage: Function;
-	totalResults: number;
-	currentQueryParams: QueryType;
-	pieData: TableRowData[];
-	loading: boolean;
-	displayResults: string;
-};
-
-const areMoreResults = (
-	dataLength: number,
-	pageNumber: number,
-	results: number,
-	limit: number,
+interface TablePaginationPropTypes {
+	changePage: Function
+	totalResults: number
+	currentQueryParams: QueryType
+	pieData: TableRowData[]
 	loading: boolean
-) => {
-	var current = (pageNumber - 1) * limit + dataLength;
-	return loading ? false : results > current;
-};
-const areLessResults = (pageNumber: number, loading: boolean) => {
-	return loading ? false : pageNumber > 0;
-};
+	displayResults: string
+}
+
+const areMoreResults = (dataLength: number, pageNumber: number, results: number, limit: number, loading: boolean) => {
+	const current = (pageNumber - 1) * limit + dataLength
+	return loading ? false : results > current
+}
+const areLessResults = (pageNumber: number, loading: boolean) => (loading ? false : pageNumber > 0)
 const TablePagination = ({
 	changePage,
 	currentQueryParams,
@@ -32,48 +27,42 @@ const TablePagination = ({
 	loading,
 	totalResults,
 	displayResults
-}: TablePaginationPropTypes) => {
-	return (
-		<div>
-			{displayResults}
-			<IconButton
-				onClick={() =>
-					changePage(
-						areLessResults(currentQueryParams._page, loading) &&
-							currentQueryParams._page - 1
-					)
-				}
-				disabled={!areLessResults(currentQueryParams._page, loading)}
-			>
-				<StyledKeyboardArrowLeft />
-			</IconButton>
-			<IconButton
-				onClick={() =>
-					changePage(
-						areMoreResults(
-							pieData ? pieData.length : 0,
-							currentQueryParams._page,
-							totalResults,
-							currentQueryParams._limit,
-							loading
-						) && currentQueryParams._page + 1
-					)
-				}
-				disabled={
-					!areMoreResults(
+}: TablePaginationPropTypes) => (
+	<div>
+		{displayResults}
+		<IconButton
+			onClick={() =>
+				changePage(areLessResults(currentQueryParams._page, loading) && currentQueryParams._page - 1)
+			}
+			disabled={!areLessResults(currentQueryParams._page, loading)}
+		>
+			<KeyboardArrowLeft />
+		</IconButton>
+		<IconButton
+			onClick={() =>
+				changePage(
+					areMoreResults(
 						pieData ? pieData.length : 0,
 						currentQueryParams._page,
 						totalResults,
 						currentQueryParams._limit,
 						loading
-					)
-				}
-			>
-				<StyledKeyboardArrowRight />
-			</IconButton>
-		</div>
-	);
-};
+					) && currentQueryParams._page + 1
+				)
+			}
+			disabled={
+				!areMoreResults(
+					pieData ? pieData.length : 0,
+					currentQueryParams._page,
+					totalResults,
+					currentQueryParams._limit,
+					loading
+				)
+			}
+		>
+			<KeyboardArrowRight />
+		</IconButton>
+	</div>
+)
 
-
-export default TablePagination;
+export default TablePagination

@@ -13,7 +13,8 @@
         "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
         "test": "react-scripts test --forceExit",
         "eject": "react-scripts eject",
-        "lint-staged": "lint-staged"
+        "lint-staged": "lint-staged",
+        "lint:fix": "eslint './src/**/*.{ts,tsx}'"
     },
     "lint-staged": {
         "*.{js,jsx}": [
@@ -38,7 +39,6 @@
         "@types/axios": "^0.14.0",
         "@types/jest": "^24.0.12",
         "@types/node": "^11.13.10",
-        "@types/react": "^16.8.17",
         "@types/react-dom": "^16.8.4",
         "@types/react-router-dom": "^4.3.3",
         "axios": "^0.18.0",
@@ -53,12 +53,12 @@
         "typescript": "^3.4.5"
     },
     "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^1.6.0",
+        "@typescript-eslint/parser": "^1.6.0",
         "eslint": "5.12.0",
-        "eslint-config-airbnb": "^17.1.0",
-        "eslint-config-prettier": "^2.9.0",
-        "eslint-plugin-import": "^2.17.2",
-        "eslint-plugin-jsx-a11y": "^6.2.1",
-        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-config-prettier": "^4.1.0",
+        "eslint-config-react": "^1.1.7",
+        "eslint-plugin-prettier": "^3.0.1",
         "eslint-plugin-react": "^7.13.0",
         "husky": "^1.0.0-rc.13",
         "lint-staged": "^7.2.0",
