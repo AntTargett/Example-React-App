@@ -22,9 +22,10 @@ const TablePagination = ({
 	totalResults,
 	displayResults
 }: TablePaginationPropTypes) => (
-	<div>
+	<React.Fragment>
 		{displayResults}
 		<IconButton
+			aria-label="Navigate Back a page"
 			// inherits parents color
 			color="inherit"
 			onClick={() =>
@@ -36,6 +37,7 @@ const TablePagination = ({
 		</IconButton>
 		<IconButton
 			color="inherit"
+			aria-label="Navigate forward a page"
 			onClick={() =>
 				changePage(
 					areMoreResults(
@@ -59,7 +61,7 @@ const TablePagination = ({
 		>
 			<KeyboardArrowRight />
 		</IconButton>
-	</div>
+	</React.Fragment>
 )
 
 export default TablePagination

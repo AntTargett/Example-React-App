@@ -14,15 +14,15 @@ import Switch from "@material-ui/core/Switch"
 
 // Below is an example of creating a class and then passing it back into the function
 // Forwards other props back into the component
-const StyledFormControlLabel = styled(other => <FormControlLabel classes={{ label: "label" }} {...other} />)`
+const StyledFormControlLabel = styled((other: any) => <FormControlLabel classes={{ label: "label" }} {...other} />)`
 	&& {
 		& .label {
-			color: ${props => props.theme.body};
+			color: ${(props: any) => props.theme.body};
 		}
 	}
 `
 
-const StyledSwitch = styled(other => (
+const StyledSwitch = styled((other: any) => (
 	<Switch
 		classes={{
 			switchBase: "root",
@@ -34,15 +34,15 @@ const StyledSwitch = styled(other => (
 ))`
 	&& {
 		& .root {
-			color: ${props => props.theme.body};
+			color: ${(props: any) => props.theme.body};
 		}
 		& .bar {
-			background-color: ${props => props.theme.body} !important;
+			background-color: ${(props: any) => props.theme.body} !important;
 		}
 	}
 `
 
-const StyledTextField = styled(other => (
+const StyledTextField = styled((other: any) => (
 	<TextField
 		InputLabelProps={{
 			classes: {
@@ -61,21 +61,21 @@ const StyledTextField = styled(other => (
 ))`
 	&& {
 		& .root {
-			color: ${props => props.theme.body} !important;
+			color: ${(props: any) => props.theme.body} !important;
 		}
 		& .label {
-			color: ${props => props.theme.body};
+			color: ${(props: any) => props.theme.body};
 		}
 		& .underline {
-			border-bottom-color: ${props => props.theme.body};
+			border-bottom-color: ${(props: any) => props.theme.body};
 			&:hover {
-				border-bottom: solid 1px ${props => props.theme.body} !important;
+				border-bottom: solid 1px ${(props: any) => props.theme.body} !important;
 			}
 			&:after {
-				border-bottom-color: ${props => props.theme.body};
+				border-bottom-color: ${(props: any) => props.theme.body};
 			}
 			&:before {
-				border-bottom-color: ${props => props.theme.body};
+				border-bottom-color: ${(props: any) => props.theme.body};
 			}
 		}
 	}
