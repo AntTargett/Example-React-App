@@ -9,14 +9,21 @@ import SearchIcon from "@material-ui/icons/Search"
 import { Link } from "react-router-dom"
 // Theme hook to make use of Emotion theming.
 import { useTheme } from "../Theme/ThemeContext"
-import TablePagination from "./TablePagination"
+import TablePagination from "./TablePaginationContainer/TablePaginationContainer"
 import useDebounce from "../util/useDebounce"
 import ErrorBoundary from "../util/ErrorBoundry"
 import mapData from "../util/mapData"
 // Function I wrote to buld up the query string based on an Object
 import { buildQueryString } from "../util/util"
 // Styled components
-import { StyledFormControlLabel, StyledTextField, MainSection, TableFooter, TableHeader, StyledSwitch } from "./styled"
+import {
+	StyledFormControlLabel,
+	StyledTextField,
+	MainSection,
+	TableFooter,
+	TableHeader,
+	StyledSwitch
+} from "./HomeContainerComponents"
 // Commonly used component
 import { Flex } from "../util/commonComponents"
 // Typescript types

@@ -8,7 +8,7 @@ import ErrorBoundary from "./util/ErrorBoundry"
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
 import SplitText from "react-pose-text"
-import { MainTitle, TitleSection, Background } from "./HomeContainer/styled"
+import { MainTitle, TitleSection, Background } from "./HomeContainer/HomeContainerComponents"
 import { DelayType } from "./types"
 const HomeContainer = lazy(() => import("./HomeContainer/HomeContainer"))
 const ExampleRoute = lazy(() => import("./ExampleRoute/ExampleRoute"))

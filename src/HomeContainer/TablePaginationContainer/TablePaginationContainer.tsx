@@ -4,7 +4,7 @@ import * as React from "react"
 import IconButton from "@material-ui/core/IconButton"
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft"
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight"
-import { TablePaginationPropTypes } from "../types"
+import { TablePaginationPropTypes } from "../../types"
 
 // Function to check whether or not the forward page button should be disabled
 const areMoreResults = (dataLength: number, pageNumber: number, results: number, limit: number, loading: boolean) => {

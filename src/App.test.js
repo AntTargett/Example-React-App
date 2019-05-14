@@ -11,6 +11,11 @@ describe("<App /> spec", () => {
 		ReactDOM.render(<App />, div)
 		ReactDOM.unmountComponentAtNode(div)
 	})
+	test("Snapshot Test", () => {
+		const { container } = render(<App />)
+		expect(container.firstChild).toMatchSnapshot()
+	})
+	
 	it("renders table title", async () => {
 		const { getByText } = render(<App />)
 		//checks title exists

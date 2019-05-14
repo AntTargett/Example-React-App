@@ -1,0 +1,523 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> spec Snapshot Test 1`] = `
+<div
+  class="css-1aor95j"
+>
+  <div
+    class="css-1x4dt0w"
+  >
+    <div
+      class="css-1imqc0y"
+    >
+      <div
+        style="display: inline-block;"
+      >
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          E
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          x
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          a
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          m
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          p
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          l
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          e
+        </div>
+         
+      </div>
+      <div
+        style="display: inline-block;"
+      >
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          R
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          e
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          a
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          c
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          t
+        </div>
+         
+      </div>
+      <div
+        style="display: inline-block;"
+      >
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          A
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          p
+        </div>
+        <div
+          style="display: inline-block; opacity: 0; transform: translateY(20px) translateZ(0);"
+        >
+          p
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="css-1gw1i1t"
+  >
+    <div
+      class="css-1qoyb3"
+    >
+      <div
+        class="css-1qoyb3"
+        style="flex: 1;"
+      >
+        <label
+          class="MuiFormControlLabel-root-11 css-1pc48fh"
+        >
+          <span
+            class="MuiSwitch-root-17 css-4a3qzo"
+          >
+            <span
+              class="MuiButtonBase-root-36 MuiIconButton-root-30 MuiPrivateSwitchBase-root-26 MuiSwitch-switchBase-20 root MuiSwitch-colorSecondary-23"
+            >
+              <span
+                class="MuiIconButton-label-35"
+              >
+                <span
+                  class="MuiSwitch-icon-18"
+                />
+                <input
+                  class="MuiPrivateSwitchBase-input-29"
+                  type="checkbox"
+                  value="darkmode"
+                />
+              </span>
+              <span
+                class="MuiTouchRipple-root-136"
+              />
+            </span>
+            <span
+              class="MuiSwitch-bar-25 bar"
+            />
+          </span>
+          <span
+            class="MuiTypography-root-39 MuiTypography-body1-48 MuiFormControlLabel-label-16 label"
+          >
+            DarkMode
+          </span>
+        </label>
+      </div>
+      <a
+        href="#/example"
+      >
+        Test Lazy loaded route
+      </a>
+    </div>
+    <div
+      class="css-3i2ewu"
+    >
+      <div
+        class="table-title-row css-1povu0j"
+      >
+        <div
+          class="table-title-div css-1uobdc4"
+        >
+          Pies of the day Total Results: 0
+        </div>
+        <div
+          class="css-106mbhu"
+        >
+          <div
+            class="MuiFormControl-root-75 css-9m5zd2"
+          >
+            <label
+              class="MuiFormLabel-root-90 MuiInputLabel-root-79 label MuiInputLabel-formControl-84 MuiInputLabel-animated-87 MuiInputLabel-shrink-86"
+              data-shrink="true"
+              for="search-field"
+            >
+              Search
+            </label>
+            <div
+              class="MuiInputBase-root-110 MuiInput-root-97 MuiInput-underline-101 underline MuiInputBase-formControl-111 MuiInput-formControl-98 MuiInputBase-adornedStart-114 root"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root-127"
+                focusable="false"
+                role="presentation"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+                />
+                <path
+                  d="M0 0h24v24H0z"
+                  fill="none"
+                />
+              </svg>
+              <input
+                aria-invalid="false"
+                class="MuiInputBase-input-120 MuiInput-input-105 MuiInputBase-inputAdornedStart-125"
+                id="search-field"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          0 to 0
+          <button
+            aria-label="Navigate Back a page"
+            class="MuiButtonBase-root-36 MuiButtonBase-disabled-37 MuiIconButton-root-30 MuiIconButton-colorInherit-31 MuiIconButton-disabled-34"
+            disabled=""
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label-35"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root-127"
+                focusable="false"
+                role="presentation"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+                />
+                <path
+                  d="M0 0h24v24H0V0z"
+                  fill="none"
+                />
+              </svg>
+            </span>
+          </button>
+          <button
+            aria-label="Navigate forward a page"
+            class="MuiButtonBase-root-36 MuiButtonBase-disabled-37 MuiIconButton-root-30 MuiIconButton-colorInherit-31 MuiIconButton-disabled-34"
+            disabled=""
+            tabindex="-1"
+            type="button"
+          >
+            <span
+              class="MuiIconButton-label-35"
+            >
+              <svg
+                aria-hidden="true"
+                class="MuiSvgIcon-root-127"
+                focusable="false"
+                role="presentation"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+                />
+                <path
+                  d="M0 0h24v24H0V0z"
+                  fill="none"
+                />
+              </svg>
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="table-div css-915iz8"
+      >
+        <div
+          class="table-header-row css-1obwat8"
+        >
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Pie  Name
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Price
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Quantity
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Store Name
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Address
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Rating
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+          <div
+            class="table-header-cell css-1y7xe7w"
+            role="button"
+            tabindex="0"
+          >
+            Mobile
+            <svg
+              class="css-17jnaqn"
+              fill="currentColor"
+              height="20px"
+              id="hoverableArrow"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0V0z"
+                fill="none"
+              />
+              <path
+                d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="css-g5hrgq"
+        >
+          <svg
+            class="css-hx6rw2"
+            height="65px"
+            viewBox="0 0 66 66"
+            width="65px"
+          >
+            <circle
+              class="css-1qh1kvh"
+              cx="33"
+              cy="33"
+              fill="none"
+              r="30"
+              stroke="#000"
+              stroke-linecap="round"
+              stroke-width="6"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-j8q3ty"
+    >
+      0 to 0
+      <button
+        aria-label="Navigate Back a page"
+        class="MuiButtonBase-root-36 MuiButtonBase-disabled-37 MuiIconButton-root-30 MuiIconButton-colorInherit-31 MuiIconButton-disabled-34"
+        disabled=""
+        tabindex="-1"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label-35"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root-127"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"
+            />
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+          </svg>
+        </span>
+      </button>
+      <button
+        aria-label="Navigate forward a page"
+        class="MuiButtonBase-root-36 MuiButtonBase-disabled-37 MuiIconButton-root-30 MuiIconButton-colorInherit-31 MuiIconButton-disabled-34"
+        disabled=""
+        tabindex="-1"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label-35"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root-127"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"
+            />
+            <path
+              d="M0 0h24v24H0V0z"
+              fill="none"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+`;
