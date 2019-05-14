@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core"
 import React, { Component } from "react"
-import { Card } from "@material-ui/core"
+import { Card, CardContent } from "@material-ui/core"
 import { ErrorBoundaryProps, ErrorBoundaryState } from "../types"
-
+import { Flex } from "./commonComponents"
 // To catch errors and display a fallback UI.
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 	constructor(props: Readonly<ErrorBoundaryProps>) {
@@ -27,13 +27,20 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 		if (hasError) {
 			// Fallback when there is an erro
 			return (
-				<Card>
-					<div>Something went wrong :( </div>
-					<div>
-						Please raise an issue at <a href="https://github.com/AntTargett/Example-React-App" />{" "}
-					</div>
-					<div>Error Message: {errorMessage}</div>
-				</Card>
+				<Flex style={{ justifyContent: "center", alignContent: "center" }}>
+					<Card>
+						<CardContent>
+							<Flex style={{ flexDirection: "column" }}>
+								<div>Something went wrong :( </div>
+								<div>
+									Please raise an issue at{" "}
+									<a href="https://github.com/AntTargett/Example-React-App"> Github page</a>{" "}
+								</div>
+								<div>Error Message: {errorMessage}</div>
+							</Flex>
+						</CardContent>
+					</Card>
+				</Flex>
 			)
 		}
 		//Will render children if no error
