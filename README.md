@@ -39,6 +39,7 @@
 - React hooks
 - Debounce hook 
 - Using Emotion 10 styled components to style material ui 
+- Created a useTheme hook utlising react context. Storing the chosen theme to local storage and allowing update via a toggle
 - Using context, hooks and emotion 10 to have a dark and light mode
 - Error Boundries 
 - Typescript 
