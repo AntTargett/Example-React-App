@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{388:function(n,t,e){"use strict";e.r(t);var a=e(6),c=e(93);t.default=function(){return Object(a.b)("div",null,"I am an Example Route ",Object(a.b)(c.b,{to:"/"},"Back"))}}}]);
+//# sourceMappingURL=4.9d2802c0.chunk.js.map
