@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "author": "Antony Targett",
+    "homepage": "http://AntTargett.github.io/Example-React-App",
     "license": "MIT",
     "scripts": {
         "fix:other": "prettier --write --tab-width 4",
@@ -15,7 +16,9 @@
         "eject": "react-scripts eject",
         "lint-staged": "lint-staged",
         "lint:fix": "eslint './src/**/*.{ts,tsx}'",
-        "updateJest": "jest --updateSnapshot"
+        "updateJest": "jest --updateSnapshot",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
     },
     "lint-staged": {
         "*.{js,jsx}": [
@@ -62,6 +65,7 @@
         "eslint-config-react": "^1.1.7",
         "eslint-plugin-prettier": "^3.0.1",
         "eslint-plugin-react": "^7.13.0",
+        "gh-pages": "^2.0.1",
         "husky": "^1.0.0-rc.13",
         "jest-dom": "^3.2.2",
         "lint-staged": "^7.2.0",
